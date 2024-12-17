@@ -21,8 +21,7 @@ class DiaryMainContent(QDialog):
         self.btn_dict = {1: QPushButton("New Entry"),
                          2: QPushButton("Edit Entry"),
                          3: QPushButton("Delete Entry"),
-                         4: QPushButton("Go Back"),
-                         5: QPushButton("Exit")}
+                         4: QPushButton("Exit")}
 
         # Create main content grid
         self.grid.addWidget(self.btn_dict[1], 1,1)
@@ -33,10 +32,10 @@ class DiaryMainContent(QDialog):
         # Make a settings page
         self.settings = QPushButton("Settings")
         self.btn_dict[1].clicked.connect(self.show_diary_entry)
+        self.btn_dict[4].clicked.connect(QApplication.instance().quit)
 
         self.vbox1.addLayout(self.grid)
         self.vbox1.addStretch()
-        self.vbox1.addWidget(self.btn_dict[5])
         self.vbox1.addWidget(self.settings)
         self.setWindowTitle("Diary Entry")
         self.setGeometry(0,0,1000,400)
@@ -54,6 +53,7 @@ class DiaryMainContent(QDialog):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+
 
 
 

@@ -18,6 +18,7 @@ class LoginContent(QDialog):
         self.label2 = QLabel("Please Enter Password")
         self.enter_button = QPushButton("Enter")
         self.lineedit1 = QLineEdit()
+        self.lineedit1.setEchoMode(QLineEdit.Password)
         self.vbox1.addWidget(self.label1)
         self.vbox1.addStretch(10)
         self.hbox1.addWidget(self.label2)
@@ -25,14 +26,20 @@ class LoginContent(QDialog):
         self.hbox1.addStretch()
         self.vbox1.addLayout(self.hbox1)
         self.vbox1.addWidget(self.enter_button)
-        self.enter_button.clicked.connect(self.show_login_enter)
+        self.enter_button.clicked.connect(self.check_login_enter)
         self.setLayout(self.vbox1)
         self.setWindowTitle("Welcome!")
 
-    def show_login_enter(self):
-        self.login_enter = DiaryMainContent()
-        self.login_enter.show()
-        self.hide()
+    def check_login_enter(self):
+        correct_password = "1234"
+        entered_password = self.lineedit1.text()
+        if entered_password == correct_password:
+            self.login_enter = DiaryMainContent()
+            self.login_enter.show()
+            self.hide()
+
+        else:
+            QMessageBox.warning(self, "Error", "Incorrect Password!")
 
 
 
