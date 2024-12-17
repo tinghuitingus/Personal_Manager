@@ -3,14 +3,15 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from stylesheet import default_stylesheet
+from diary_entry_sheet import DiaryEntry
 
-class MainContent(QDialog):
+class DiaryMainContent(QDialog):
     def __init__(self):
         super().__init__()
-        self.initui()
+        self.initUI()
 
 
-    def initui(self):
+    def initUI(self):
 
         self.grid = QGridLayout()
         self.hbox1 = QHBoxLayout()
@@ -31,18 +32,22 @@ class MainContent(QDialog):
 
         # Make a settings page
         self.settings = QPushButton("Settings")
-
+        self.btn_dict[1].clicked.connect(self.show_diary_entry)
 
         self.vbox1.addLayout(self.grid)
         self.vbox1.addStretch()
         self.vbox1.addWidget(self.btn_dict[5])
         self.vbox1.addWidget(self.settings)
-
-        self.setLayout(self.vbox1)
-
         self.setWindowTitle("Diary Entry")
         self.setGeometry(0,0,1000,400)
         self.center()
+
+        self.setLayout(self.vbox1)
+
+    def show_diary_entry(self):
+        self.diary_entry = DiaryEntry(self)
+        self.diary_entry.show()
+        self.hide()
 
     def center(self):
         qr = self.frameGeometry()
@@ -55,7 +60,7 @@ class MainContent(QDialog):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyleSheet(default_stylesheet)
-    main_win = MainContent()
+    main_win = DiaryMainContent()
     main_win.show()
     sys.exit(app.exec())
 
