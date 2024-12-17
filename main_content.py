@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+from stylesheet import default_stylesheet
 
 class MainContent(QDialog):
     def __init__(self):
@@ -10,16 +11,6 @@ class MainContent(QDialog):
 
 
     def initui(self):
-        self.setStyleSheet("""
-            QPushButton {
-                font-family: 'Comic Sans MS';
-                font-size: 20px;
-                font-weight: bold;
-            }
-            QWidget {
-                background-color: pink;
-            }
-        """)
 
         self.grid = QGridLayout()
         self.hbox1 = QHBoxLayout()
@@ -50,7 +41,7 @@ class MainContent(QDialog):
         self.setLayout(self.vbox1)
 
         self.setWindowTitle("Diary Entry")
-        self.setGeometry(0,0,100,400)
+        self.setGeometry(0,0,1000,400)
         self.center()
 
     def center(self):
@@ -59,13 +50,11 @@ class MainContent(QDialog):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def show_color_picker(self):
-        color = QColorDialog.getColor()
-
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setStyleSheet(default_stylesheet)
     main_win = MainContent()
     main_win.show()
     sys.exit(app.exec())
