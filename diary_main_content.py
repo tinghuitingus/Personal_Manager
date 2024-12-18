@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from stylesheet import default_stylesheet
 from diary_entry_sheet import DiaryEntry
+from edit_entry import EditEntry
 
 class DiaryMainContent(QDialog):
     def __init__(self):
@@ -32,6 +33,7 @@ class DiaryMainContent(QDialog):
         # Make a settings page
         self.settings = QPushButton("Settings")
         self.btn_dict[1].clicked.connect(self.show_diary_entry)
+        self.btn_dict[2].clicked.connect(self.show_edit_entry)
         self.btn_dict[4].clicked.connect(QApplication.instance().quit)
 
         self.vbox1.addLayout(self.grid)
@@ -46,6 +48,11 @@ class DiaryMainContent(QDialog):
     def show_diary_entry(self):
         self.diary_entry = DiaryEntry(self)
         self.diary_entry.show()
+        self.hide()
+        
+    def show_edit_entry(self):
+        self.edit_entry = EditEntry(self)
+        self.edit_entry.show()
         self.hide()
 
     def center(self):
